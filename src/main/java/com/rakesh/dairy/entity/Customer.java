@@ -1,8 +1,10 @@
 package com.rakesh.dairy.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -12,41 +14,37 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name="CUSTOMER")
+@Table(name="customer")
 @EntityListeners(AuditingEntityListener.class)
-public class Customer {
+public class Customer implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "CUSTOMER_ID", unique = true, nullable = false)
+	@Column(name = "customer_id", unique = true, nullable = false)
 	private Integer id;
 	private String firstName;
 	private String lastName;
 	private LocalDate dateOfBirth;
-	private String customerId;
+	private String customerCode;
 	private String fatherName;
 	private Long mobileNumber;
 	private String address;
 	
 	@Column(nullable = false, updatable = false)
-	@Temporal(TemporalType.DATE)
 	@CreatedDate
 	private LocalDate createdDate;
 	
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     @LastModifiedDate	
 	private LocalDate updatedDate;
     
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "CUSTOMER")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade=CascadeType.ALL)
 	private Set<Milk> milks;
 
 	public Integer getId() {
@@ -81,12 +79,12 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getCustomerId() {
-		return customerId;
+	public String getCustomerCode() {
+		return customerCode;
 	}
 
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
 	}
 
 	public String getFatherName() {
@@ -142,7 +140,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
-				+ dateOfBirth + ", customerId=" + customerId + ", fatherName=" + fatherName + ", mobileNumber="
+				+ dateOfBirth + ", customerCode=" + customerCode + ", fatherName=" + fatherName + ", mobileNumber="
 				+ mobileNumber + ", address=" + address + ", createdDate=" + createdDate + ", updatedDate="
 				+ updatedDate + ", milks=" + milks + "]";
 	}

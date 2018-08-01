@@ -1,7 +1,9 @@
 package com.rakesh.dairy.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -12,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -23,16 +23,16 @@ import com.rakesh.dairy.constant.MilkType;
 import com.rakesh.dairy.constant.Shift;
 
 @Entity
-@Table(name="MILK")
+@Table(name="milk")
 @EntityListeners(AuditingEntityListener.class)
-public class Milk {
+public class Milk implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "MILK_ID", unique = true, nullable = false)
+	@Column(name = "milk_id", unique = true, nullable = false)
 	private Integer id;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CUSTOMER_ID", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 	private Float weight;
 	private Float fat;
@@ -40,15 +40,12 @@ public class Milk {
 	private Double price;
 	private MilkType milkType;
 	private Shift shift;
-	@Temporal(TemporalType.DATE)
 	private LocalDate date;
 	@Column(nullable = false, updatable = false)
-	@Temporal(TemporalType.DATE)
 	@CreatedDate
 	private LocalDate createdDate;
 	
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
     @LastModifiedDate	
 	private LocalDate updatedDate;
 	

@@ -1,5 +1,8 @@
 package com.rakesh.dairy.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,19 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RATE")
-public class Rate {
+@Table(name="rate")
+public class Rate implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String id;
+	@Column(name = "rate_id", unique = true, nullable = false)
+	private Integer id;
 	private Float fat;
 	private Float snf;
 	private Double rate;
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Float getFat() {
