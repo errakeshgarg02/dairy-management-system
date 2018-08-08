@@ -24,12 +24,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Customer implements Serializable {
 
+	private static final long serialVersionUID = -3138629692065217932L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "customer_id", unique = true, nullable = false)
 	private Integer id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private LocalDate dateOfBirth;
 	private String customerCode;
 	private String fatherName;
@@ -44,7 +44,7 @@ public class Customer implements Serializable {
     @LastModifiedDate	
 	private LocalDate updatedDate;
     
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Milk> milks;
 
 	public Integer getId() {
@@ -55,20 +55,12 @@ public class Customer implements Serializable {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalDate getDateOfBirth() {
@@ -139,9 +131,8 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
-				+ dateOfBirth + ", customerCode=" + customerCode + ", fatherName=" + fatherName + ", mobileNumber="
-				+ mobileNumber + ", address=" + address + ", createdDate=" + createdDate + ", updatedDate="
-				+ updatedDate + ", milks=" + milks + "]";
+		return "Customer [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", customerCode="
+				+ customerCode + ", fatherName=" + fatherName + ", mobileNumber=" + mobileNumber + ", address="
+				+ address + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + ", milks=" + milks + "]";
 	}
 }

@@ -1,23 +1,22 @@
 package com.rakesh.dairy.model;
 
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class CustomerCreateRequest {
+public class CustomerUpdateRequest implements Serializable {
 	
-	@NotNull
-	private String name;
+	private static final long serialVersionUID = -6350181391841281913L;
+	private Integer id;
 	private String fatherName;
-	
-	@NotNull
 	private Long mobileNumber;
 	private String dateOfBirth;
 	private String address;
 	
-	public String getName() {
-		return name;
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getFatherName() {
 		return fatherName;
@@ -45,7 +44,7 @@ public class CustomerCreateRequest {
 	}
 	@Override
 	public String toString() {
-		return "CustomerCreateRequest [name=" + name + ", fatherName=" + fatherName + ", mobileNumber=" + mobileNumber
+		return "CustomerUpdateRequest [id=" + id + ", fatherName=" + fatherName + ", mobileNumber=" + mobileNumber
 				+ ", dateOfBirth=" + dateOfBirth + ", address=" + address + "]";
 	}
 	

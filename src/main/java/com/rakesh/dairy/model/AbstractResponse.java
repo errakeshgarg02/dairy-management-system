@@ -1,11 +1,12 @@
 package com.rakesh.dairy.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.io.Serializable;
 
-public class AbstractResponse {
+import org.springframework.http.HttpStatus;
 
-	private Integer status;
+public class AbstractResponse implements Serializable {
+
+	private Integer status = HttpStatus.OK.value();
 	private Object data;
 	public Integer getStatus() {
 		return status;

@@ -2,6 +2,7 @@ package com.rakesh.dairy.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,6 +28,7 @@ import com.rakesh.dairy.constant.Shift;
 @EntityListeners(AuditingEntityListener.class)
 public class Milk implements Serializable {
 	
+	private static final long serialVersionUID = 815476223346101612L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "milk_id", unique = true, nullable = false)
@@ -38,8 +40,8 @@ public class Milk implements Serializable {
 	private Float fat;
 	private Float snf;
 	private Double price;
-	private MilkType milkType;
-	private Shift shift;
+	private String milkType;
+	private String shift;
 	private LocalDate date;
 	@Column(nullable = false, updatable = false)
 	@CreatedDate
@@ -85,16 +87,16 @@ public class Milk implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public MilkType getMilkType() {
+	public String getMilkType() {
 		return milkType;
 	}
-	public void setMilkType(MilkType milkType) {
+	public void setMilkType(String milkType) {
 		this.milkType = milkType;
 	}
-	public Shift getShift() {
+	public String getShift() {
 		return shift;
 	}
-	public void setShift(Shift shift) {
+	public void setShift(String shift) {
 		this.shift = shift;
 	}
 	public LocalDate getDate() {
