@@ -38,52 +38,43 @@
     <li class="nav-item">
       <a class="nav-link" href="/milk/searchMilkPage">Search Milk</a>
     </li>
-    <li class="nav-item">
+      <li class="nav-item">
       <a class="nav-link" href="/rate/addRatePage">Add Rate</a>
     </li> 
     <li class="nav-item">
       <a class="nav-link" href="/rate/findAll">View RateList</a>
-    </li>  
+    </li>        
   </ul>
 </nav>    
 </div><br/><br/><br/><br/>
-<div class="container">
-	
+<div class="container">	
 	<div class="">
-		<h2>Display all Customers</h2>
-          <p>Type something in the input field to search the table for name, mobile number etc:</p>  
+		<h2>Display Rate list</h2>
+          <p>Type something in the input field to search the table for rate, fat or snf:</p>  
           <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
           <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr>
-                <th>Customer Code</th>  
-                <th>Name</th>
-                <th>Father name</th>
-                <th>Mobile</th>
-                <th>Address</th>
-                <th>Edit Operation</th>
-                <th>Add Milk Operation</th>  
+                <th>Fat</th>  
+                <th>Snf</th>
+                <th>Rate</th>
+                <th>Update Operation</th>
+                <th>Delete Operate</th>
               </tr>
             </thead>              
-            <tbody id="myTable" th:each="customer: ${customers}">
+            <tbody id="myTable" th:each="rate: ${rates}">
               <tr>
-                <td th:text="${customer.customerCode}"></td>
-                <td th:text="${customer.name}"></td>
-                <td th:text="${customer.fatherName}"></td>
-                <td th:text="${customer.mobileNumber}"></td> 
-                <td th:text="${customer.address}"></td>
-                <td><a th:with="var=*{customer.id}" th:href="@{'/customer/edit?id='+${var}}">Edit</a></td>
-                <td><a th:with="var=*{customer.id}" th:href="@{'/milk/addMilkPageWithCustomer?customerId='+${var}}">Add Milk</a></td>
+                <td th:text="${rate.fat}"></td>
+                <td th:text="${rate.snf}"></td>
+                <td th:text="${rate.rate}"></td>
+                <td><a th:with="var=*{rate.id}" th:href="@{'/rate/edit?id='+${var}}">Edit</a></td>
+                <td><a th:with="var=*{rate.id}" th:href="@{'/rate/delete?id='+${var}}">Delete</a></td>
                 </tr>  
             </tbody>
-          </table>
-        
+          </table>        
 	</div>
-
-</div>
-
-    
+</div>    
 <script>
 $(document).ready(function(){
   $("#myInput").on("keyup", function() {
@@ -95,7 +86,5 @@ $(document).ready(function(){
 });    
        
 </script>
-    
-
 </body>
 </html>

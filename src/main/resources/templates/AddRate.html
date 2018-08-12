@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Dairy Management System | Customer Registration</title>
+  <title>Dairy Management System | Add Rate</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -38,47 +38,34 @@
     <li class="nav-item">
       <a class="nav-link" href="/milk/searchMilkPage">Search Milk</a>
     </li>
-    <li class="nav-item">
+      <li class="nav-item">
       <a class="nav-link" href="/rate/addRatePage">Add Rate</a>
     </li> 
     <li class="nav-item">
       <a class="nav-link" href="/rate/findAll">View RateList</a>
-    </li>  
+    </li>      
   </ul>
 </nav>    
 </div><br/><br/><br/><br/>
-<div class="container">
-    <div class="">
-        	<h2>Search Customer</h2>
-            <p>Type Customer name or mobile number to search Customer Data</p>  
-    </div>
-
-           <div class="row">
-                <div class="form-group col-md-9">                    
-                    <input type="text" class="form-control" id="searchInputId" placeholder="enter name or customerCode or mobile number to search...."/>    
+<div class="container">		
+        <fieldset>
+        <h2>Add Rate Form</h2>     
+		<form action="#" th:action="@{/rate/create}" th:object="${createRate}" method="post">            
+                <div class="form-group">
+                    <label for="fat">Fat:</label>
+				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{fat}"/>
                 </div>
-                <div class="form-group col-md-3">
-                    <button class="btn btn-info" id="search" >Search</a>
+                <div class="form-group">
+                    <label for="snf">Snf:</label>
+				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{snf}"/> 
                 </div>
-               
-            </div>
-
-</div>
-<script>
-$(document).ready(function() {
-
-  $('#search').click(function() {
-         var searchInputId = $('#searchInputId').val();   
-      
-      if(searchInputId == '') {
-          alert("Please enter name or mobile number or customer code to search");
-          return false;
-      }
-      var url = '/customer/find?input='+searchInputId+'&isMultiple=true';   
-      window.location.href = url;     
-    
-  });
-});    
-</script>
+                 <div class="form-group">
+                    <label for="rate">Rate:</label>
+				    <input type="number" class="form-control" min="0.0" step=".01" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{rate}"/> 
+                </div>	
+			<button type="submit" class="btn btn-primary btn-block">Add Rate</button>
+		</form>       
+        </fieldset>
+</div> 
 </body>
 </html>

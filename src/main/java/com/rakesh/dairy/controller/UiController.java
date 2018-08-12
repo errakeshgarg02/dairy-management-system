@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rakesh.dairy.model.AbstractResponse;
 import com.rakesh.dairy.model.CreateCustomerRequest;
 import com.rakesh.dairy.model.MilkRequest;
+import com.rakesh.dairy.model.RateRequest;
 import com.rakesh.dairy.model.SearchMilkRequest;
 import com.rakesh.dairy.model.CustomerUpdateRequest;
 import com.rakesh.dairy.service.CustomerService;
@@ -65,6 +66,12 @@ public class UiController {
 	@GetMapping("/milk/addMilkPage")
 	public ModelAndView addMilkPage() {
 		ModelAndView modelAndView = new ModelAndView("AddMilk", "createMilkRequest", new MilkRequest());
+		return modelAndView;
+	}
+	
+	@GetMapping("/rate/addRatePage")
+	public ModelAndView addRatePage() {
+		ModelAndView modelAndView = new ModelAndView("AddRate", "createRate", new RateRequest());		
 		return modelAndView;
 	}
 }

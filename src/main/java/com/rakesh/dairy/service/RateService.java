@@ -9,7 +9,7 @@ public interface RateService {
 	
 	public AbstractResponse createRate(RateRequest rateRequest) throws DairyException;
 	
-	public AbstractResponse updateRate(UpdateRateRequest rateRequest) throws DairyException;
+	public AbstractResponse updateRate(RateRequest rateRequest) throws DairyException;
 	
 	public AbstractResponse findAll() throws DairyException;
 	

@@ -1,8 +1,8 @@
 package com.rakesh.dairy.util;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,19 +16,17 @@ import com.rakesh.dairy.entity.Customer;
 import com.rakesh.dairy.entity.Milk;
 import com.rakesh.dairy.entity.Rate;
 import com.rakesh.dairy.exception.DairyException;
-import com.rakesh.dairy.model.MilkRequest;
 import com.rakesh.dairy.model.CreateCustomerRequest;
 import com.rakesh.dairy.model.CustomerData;
 import com.rakesh.dairy.model.CustomerUpdateRequest;
+import com.rakesh.dairy.model.MilkRequest;
 import com.rakesh.dairy.model.RateRequest;
-import com.rakesh.dairy.model.UpdateMilkRequest;
 import com.rakesh.dairy.model.UpdateRateRequest;
 
 @Component
 public class ConverterUtil {
 
 	private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
 
 	public Customer convertToCustomerEntity(CreateCustomerRequest createRequest) throws DairyException {
 
@@ -57,10 +55,10 @@ public class ConverterUtil {
 		if (!StringUtils.isEmpty(updateRequest.getMobileNumber())) {
 			customer.setMobileNumber(updateRequest.getMobileNumber());
 		}
-		
+
 		if (!StringUtils.isEmpty(updateRequest.getName())) {
 			customer.setName(updateRequest.getName());
-		}		
+		}
 
 		return customer;
 	}
@@ -68,11 +66,11 @@ public class ConverterUtil {
 	public LocalDate stringToLocalDate(String date) {
 		return LocalDate.parse(date, dateFormatter);
 	}
-	
+
 	public String localDateToString(LocalDate date) {
 		return date.toString();
 	}
-	
+
 	public Rate convertToRateEntity(RateRequest rateRequest) throws DairyException {
 		if (rateRequest == null) {
 			throw new DairyException("request can not be null");
@@ -84,26 +82,26 @@ public class ConverterUtil {
 
 		return rate;
 	}
-	
-	public Rate convertToRateEntity(UpdateRateRequest rateRequest, Rate rate) throws DairyException {
-		
-		if(!StringUtils.isEmpty(rateRequest.getSnf())) {
+
+	public Rate convertToRateEntity(RateRequest rateRequest, Rate rate) throws DairyException {
+
+		if (!StringUtils.isEmpty(rateRequest.getSnf())) {
 			rate.setSnf(rateRequest.getSnf());
 		}
-		
-		if(!StringUtils.isEmpty(rateRequest.getFat())) {
+
+		if (!StringUtils.isEmpty(rateRequest.getFat())) {
 			rate.setFat(rateRequest.getFat());
 		}
-		
-		if(!StringUtils.isEmpty(rateRequest.getRate())) {
+
+		if (!StringUtils.isEmpty(rateRequest.getRate())) {
 			rate.setRate(rateRequest.getRate());
 		}
 
 		return rate;
 	}
-	
+
 	public Milk convertToMilkEntity(MilkRequest request) throws DairyException {
-		if(StringUtils.isEmpty(request)) {
+		if (StringUtils.isEmpty(request)) {
 			throw new DairyException("Request cant not be null");
 		}
 		Milk milk = new Milk();
@@ -113,48 +111,47 @@ public class ConverterUtil {
 		milk.setShift(request.getShift().getValue());
 		milk.setSnf(request.getSnf());
 		milk.setWeight(request.getWeight());
-		
+
 		return milk;
 	}
-	
-	
+
 	public Milk convertToMilkEntity(MilkRequest request, Optional<Milk> optionalMilk) throws DairyException {
-		
-		if(!optionalMilk.isPresent()) {
+
+		if (!optionalMilk.isPresent()) {
 			throw new DairyException("Milk does not exits");
 		}
-		
+
 		Milk milk = optionalMilk.get();
-		
-		if(!StringUtils.isEmpty(request.getDate())) {
+
+		if (!StringUtils.isEmpty(request.getDate())) {
 			milk.setDate(stringToLocalDate(request.getDate()));
 		}
-		
-		if(!StringUtils.isEmpty(request.getFat())) {
+
+		if (!StringUtils.isEmpty(request.getFat())) {
 			milk.setFat(request.getFat());
 		}
-		
-		if(!StringUtils.isEmpty(request.getMilkType())) {
+
+		if (!StringUtils.isEmpty(request.getMilkType())) {
 			milk.setMilkType(request.getMilkType().getValue());
 		}
-		
-		if(!StringUtils.isEmpty(request.getShift())) {
+
+		if (!StringUtils.isEmpty(request.getShift())) {
 			milk.setShift(request.getShift().getValue());
 		}
-		
-		if(!StringUtils.isEmpty(request.getSnf())) {
+
+		if (!StringUtils.isEmpty(request.getSnf())) {
 			milk.setSnf(request.getSnf());
 		}
-		
-		if(!StringUtils.isEmpty(request.getWeight())) {
+
+		if (!StringUtils.isEmpty(request.getWeight())) {
 			milk.setWeight(request.getWeight());
 		}
-		
+
 		return milk;
-	}	
-	
+	}
+
 	public CustomerUpdateRequest convertCustomerToCustomerUpdateRequest(Customer customer) {
-		
+
 		CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest();
 		customerUpdateRequest.setAddress(customer.getAddress());
 		customerUpdateRequest.setCustomerCode(customer.getCustomerCode());
@@ -165,23 +162,23 @@ public class ConverterUtil {
 		customerUpdateRequest.setName(customer.getName());
 		return customerUpdateRequest;
 	}
-	
+
 	public List<MilkRequest> convertToMilkRequests(List<Milk> milkList) {
 		return milkList.stream().map(m -> {
-			MilkRequest  milk = new MilkRequest();
+			MilkRequest milk = new MilkRequest();
 			return prepareMilkRequestData(m, milk);
 		}).collect(Collectors.toList());
 	}
 
 	public MilkRequest convertToMilkRequest(Optional<Milk> optionaMilk) throws DairyException {
-		if(!optionaMilk.isPresent()) {
+		if (!optionaMilk.isPresent()) {
 			throw new DairyException("Milk does not exits");
 		}
 		Milk m = optionaMilk.get();
-		MilkRequest  milk = new MilkRequest();
+		MilkRequest milk = new MilkRequest();
 		return prepareMilkRequestData(m, milk);
 	}
-	
+
 	private MilkRequest prepareMilkRequestData(Milk m, MilkRequest milk) {
 		milk.setDate(localDateToString(m.getDate()));
 		milk.setFat(m.getFat());
@@ -196,10 +193,8 @@ public class ConverterUtil {
 		return milk;
 	}
 
-
-	
 	public List<CustomerData> convertToCustomerData(List<Customer> customers) {
-		List<CustomerData> collect = customers.stream().map(c ->{
+		List<CustomerData> collect = customers.stream().map(c -> {
 			CustomerData customerData = new CustomerData();
 			return prepareCustomerData(c, customerData);
 		}).collect(Collectors.toList());
@@ -208,13 +203,13 @@ public class ConverterUtil {
 
 	public CustomerData convertToCustomerData(Optional<Customer> optCustomer) {
 		CustomerData customerData = new CustomerData();
-		if(optCustomer.isPresent()) {
-			Customer c = optCustomer.get();			
+		if (optCustomer.isPresent()) {
+			Customer c = optCustomer.get();
 			customerData = prepareCustomerData(c, customerData);
 		}
 		return customerData;
 	}
-	
+
 	private CustomerData prepareCustomerData(Customer c, CustomerData customerData) {
 		customerData.setCustomerCode(c.getCustomerCode());
 		customerData.setId(c.getId());
@@ -225,6 +220,31 @@ public class ConverterUtil {
 		customerData.setMobileNumber(c.getMobileNumber());
 		return customerData;
 	}
-	
 
+	public RateRequest convertToRateRequest(Optional<Rate> rate) {
+		RateRequest rateRequest = new RateRequest();
+		if (rate.isPresent()) {
+			rateRequest = prepareRateRequest(rate.get(), rateRequest);
+		}
+		return rateRequest;
+	}
+
+	public List<RateRequest> convertToRateRequest(List<Rate> rates) {
+		List<RateRequest> collect = new ArrayList<>();
+		if (rates != null && rates.size() > 0) {
+			collect = rates.stream().map(rate -> {
+				RateRequest rateRequest = new RateRequest();
+				return prepareRateRequest(rate, rateRequest);
+			}).collect(Collectors.toList());
+		}
+		return collect;
+	}
+
+	private RateRequest prepareRateRequest(Rate rate, RateRequest rateRequest) {
+		rateRequest.setFat(rate.getFat());
+		rateRequest.setId(rate.getId());
+		rateRequest.setRate(rate.getRate());
+		rateRequest.setSnf(rate.getSnf());
+		return rateRequest;
+	}
 }

@@ -86,9 +86,12 @@ public class MilkController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-	public AbstractResponse delete(@RequestParam("id") Integer id) {
-		return milkService.deleteMilkById(id);
+	@GetMapping(value = "/delete")
+	public ModelAndView delete(@RequestParam("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView();
+		milkService.deleteMilkById(id);
+		modelAndView.setViewName("redirect:/milk/findCustomerMilk?customerId="+id);
+		return modelAndView;
 	}
 
 	@GetMapping(value = "/deleteAll", produces = MediaType.APPLICATION_JSON_VALUE)

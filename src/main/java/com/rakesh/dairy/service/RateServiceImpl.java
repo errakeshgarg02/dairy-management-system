@@ -1,5 +1,6 @@
 package com.rakesh.dairy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,29 +35,24 @@ public class RateServiceImpl implements RateService {
 	}
 
 	@Override
-	public AbstractResponse updateRate(UpdateRateRequest rateRequest) throws DairyException {
+	public AbstractResponse updateRate(RateRequest rateRequest) throws DairyException {
 		AbstractResponse response = new AbstractResponse();
-		if(StringUtils.isEmpty(rateRequest) || StringUtils.isEmpty(rateRequest.getId())) {
-			throw new DairyException("Rate id can not be null");
-		}
 		Optional<Rate> findById = repository.findById(rateRequest.getId());
 		
 		if(findById.isPresent()) {
 			Rate rate = converterUtil.convertToRateEntity(rateRequest, findById.get());
 			rate = repository.save(rate);
 			response.setData(rate.getId());
-		} else {
-			response.setStatus(HttpStatus.NOT_FOUND.value());
-			response.setData("Object not found");
-		}
-		
+		} 
 		return response;
 	}
 
 	@Override
 	public AbstractResponse findAll() throws DairyException {
 		AbstractResponse response = new AbstractResponse();
-		response.setData(repository.findAll());
+		List<Rate> findAll = repository.findAll();
+		List<RateRequest> convertToRateRequest = converterUtil.convertToRateRequest(findAll);
+		response.setData(convertToRateRequest);
 		return response;
 	}
 
@@ -71,7 +67,9 @@ public class RateServiceImpl implements RateService {
 	@Override
 	public AbstractResponse findById(Integer id) {
 		AbstractResponse response = new AbstractResponse();
-		response.setData(repository.findById(id));
+		Optional<Rate> findById = repository.findById(id);
+		RateRequest rateRequest = converterUtil.convertToRateRequest(findById);
+		response.setData(rateRequest);
 		return response;
 	}
 

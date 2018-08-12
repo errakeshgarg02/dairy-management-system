@@ -8,6 +8,8 @@ public class RateRequest implements Serializable {
 	private Float fat;
 	private Float snf;
 	private Double rate;
+	private Integer id;
+	
 	public Float getFat() {
 		return fat;
 	}
@@ -26,9 +28,16 @@ public class RateRequest implements Serializable {
 	public void setRate(Double rate) {
 		this.rate = rate;
 	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "RateCreateRequest [fat=" + fat + ", snf=" + snf + ", rate=" + rate + "]";
+		return "RateRequest [fat=" + fat + ", snf=" + snf + ", rate=" + rate + ", id=" + id + "]";
 	}
 	
 }
