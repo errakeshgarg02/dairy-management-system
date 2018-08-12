@@ -8,25 +8,99 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    
-    
+   <style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+      width: 100%;
+      height: 100%;
+  }
+  </style>  
 </head>
 <body>
-
+    
+<div id="">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="/home">
+    <img src="/logo.jpg" alt="logo" style="width:40px;">
+  </a>  
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="/home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/customer/findAll">All Registered Customer</a>
+    </li>      
+    <li class="nav-item">
+      <a class="nav-link" href="/customer/signup">Register Customer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/customer/search">Search Customer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/milk/addMilkPage">Add Milk</a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="/milk/searchMilkPage">Search Milk</a>
+    </li>      
+  </ul>
+</nav>    
+</div><br/><br/><br/><br/>
+    
 <div class="container">
-	
-	<div class="">
-		<h2>Welcome to Dairy Management System</h2>
-		<a href="/customer/signup" class="btn btn-info" role="button">Customer Signup</a>
-		<a href="/customer/search" class="btn btn-info" role="button">Search Customer</a>
-		<a href="/milk/searchMilkPage" class="btn btn-info" role="button">Search Milk</a>
-		<a href="/customer/findAll" class="btn btn-info" role="button">All Customers</a>
-		<br/>
-		<a href="/milk/addMilkPage" class="btn btn-info" role="button">Add Milk</a>
-	
-	</div>
-
+    <div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="verka1.jpg" alt="Los Angeles" width="800" height="400">
+<!--      <div class="carousel-caption">
+        <h3>Los Angeles</h3>
+        <p>We had such a great time in LA!</p>
+      </div> -->  
+    </div>
+    <div class="carousel-item">
+      <img src="verka2.jpg" alt="Chicago" width="800" height="400">
+ <!--     <div class="carousel-caption">
+        <h3>Chicago</h3>
+        <p>Thank you, Chicago!</p>
+      </div> -->  
+    </div>
+    <div class="carousel-item">
+      <img src="verka3.jpg" alt="New York" width="800" height="400">
+<!--      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div> -->  
+    </div>
+    <div class="carousel-item">
+      <img src="verka4.jpg" alt="New York" width="800" height="400">
+<!--      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div> -->  
+    </div>   
+    <div class="carousel-item">
+      <img src="verka5.png" alt="New York" width="800" height="400">
+<!--      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div> -->  
+    </div>      
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>   
+    
 </div>
 
-</body>
+</body>   
 </html>
