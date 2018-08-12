@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dairy Management System | Customer Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+   
+
+ 
+    
+</head>
+<body>
+
+<div class="container">
+	   <h2>Display Customer Milk Data</h2>
+        <p>Type something in the input field to search the table:</p>  
+        <div class="row">
+        <div class="col-md-6">
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        </div>
+        <div class="col-md-6">
+                   <button class="dt-button buttons-print" tabindex="0" aria-controls="example" type="button"><span>Print</span></button> 
+        </div>
+    </div><br>
+	<div id="printDiv">		
+        <p><strong>Customer Name:</strong> <label th:text="${customerName}"></label>
+            <strong>| Customer Code: </strong><label th:text="${customerCode}"></label>
+        </p><br>    
+                
+          <table class="table table-hover table-bordered" id="printTable">
+            <thead class="thead-dark">
+              <tr>
+                <th>Date</th>  
+                <th>weight</th>
+                <th>Fat</th>
+                <th>Snf</th>
+                <th>Price</th>
+                <th>Shift</th>
+                <th>Milk Type</th>                 
+              </tr>
+            </thead>
+            <tbody id="myTable">
+              <tr th:each="milk: ${milkList}">                
+                <td th:text="${milk.date}"></td>
+                <td><a th:with="var=*{milk.id}" th:href="@{'/milk/edit?id='+${var}}" th:text="${milk.weight}"></a></td>
+                <td th:text="${milk.fat}"></td> 
+                <td th:text="${milk.snf}"></td>
+                <td th:text="${milk.price}"></td>
+                <td th:text="${milk.shift}"></td> 
+                <td th:text="${milk.milkType}"></td>                                
+              </tr>
+            </tbody>
+            <tfoot class="thead-light">
+                <tr>
+                    <th>Total Weight</th>
+                    <th><strong th:text="${totalWeight}"></strong><code> ltr</code></th>
+                    <th></th>
+                    <th>Total Price</th>
+                    <th><strong th:text="${totalPrice}"></strong><code> Rs.</code></th>
+                    <th></th>
+                    <th></th>
+                                      
+                </tr>
+                 
+            </tfoot> 
+          </table>
+        
+	</div>
+
+</div>
+   
+       <script>
+function printData()
+{
+   var divToPrint=document.getElementById("printDiv");
+   newWin= window.open("");   
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('button').on('click',function(){
+printData();
+})
+    </script>
+
+
+
+
+    
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+    
+</body>
+</html>

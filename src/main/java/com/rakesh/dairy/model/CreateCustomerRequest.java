@@ -2,7 +2,9 @@ package com.rakesh.dairy.model;
 
 import javax.validation.constraints.NotNull;
 
-public class CustomerCreateRequest {
+public class CreateCustomerRequest {
+	
+	private String customerCode;
 	
 	@NotNull
 	private String name;
@@ -13,6 +15,14 @@ public class CustomerCreateRequest {
 	private String dateOfBirth;
 	private String address;
 	
+	
+	
+	public String getCustomerCode() {
+		return customerCode;
+	}
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
 	public String getName() {
 		return name;
 	}

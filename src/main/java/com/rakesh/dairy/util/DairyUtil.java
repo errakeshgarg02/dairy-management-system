@@ -55,4 +55,25 @@ public class DairyUtil {
 		return Double.valueOf(df2.format(price));
 	}
 	
+	public boolean isMobileNumber(String input) {
+		if(input.matches("[0-9]+")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isCustomerCode(String input) {
+		if(input.matches("[a-zA-Z]+[0-9]+")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isCustomerName(String input) {
+		if(input.matches("[a-zA-Z]+")) {
+			return true;
+		}
+		return false;
+	}
+	
 }

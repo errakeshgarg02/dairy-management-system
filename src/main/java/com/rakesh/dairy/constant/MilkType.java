@@ -13,9 +13,9 @@ public enum MilkType {
 		return value;
 	}
 
-	public MilkType getMilkType(String value) {
+	public static MilkType getMilkType(String value) {
 		for (MilkType val : MilkType.values()) {
-			if (val.equals(value)) {
+			if (val.getValue().equals(value)) {
 				return val;
 			}
 		}

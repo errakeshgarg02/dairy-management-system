@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dairy Management System | Customer Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    
+</head>
+<body>
+
+<div class="container">
+		
+        <fieldset>
+            <h2>Update Milk Form</h2>
+		<form action="#" th:action="@{/milk/update}" th:object="${milkRequest}" method="post">
+            <input type="hidden" th:field="*{id}" th:value="${milkRequest.id}"/>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="customerCode">Customer Code:</label>
+                    <input type="text" th:value="${milkRequest.customerCode}" class="form-control" readonly th:field="*{customerCode}"/>    
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="customerName">Customer Name:</label>
+                    <input type="text" class="form-control" id="name" th:value="${milkRequest.customerName}" readonly th:field="*{customerName}"/> 
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="datepicker" th:value="${milkRequest.date}" th:field="*{date}"/>                
+                </div>                 
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="weight">Weight:</label>
+				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:value="${milkRequest.weight}" th:field="*{weight}"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fate">Fat:</label>
+				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:value="${milkRequest.fat}" th:field="*{fat}"/>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="snf">Snf:</label>
+				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:value="${milkRequest.snf}" th:field="*{snf}"/> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="shift">Shift:</label>
+                    <select class="form-control" th:selected="${milkRequest.shift}" th:field="*{shift}">
+                        <option value="#" selected>Select</option>
+                        <option value="MORNING">MORNING</option>
+                        <option value="EVENING">EVENING</option>
+                    </select>                  
+			     </div>
+                <div class="form-group col-md-6">
+                   <label for="milkType">Milk Type:</label>
+                        <select class="form-control" th:selected="${milkRequest.milkType}" th:field="*{milkType}">
+                            <option value="#" selected>Select</option>
+                            <option value="BUFFALO">BUFFALO</option>
+                            <option value="COW">COW</option>
+                        </select>                
+			     </div>    
+            </div>
+	
+			<button type="submit" class="btn btn-primary btn-block">Update Milk</button>
+		</form>      
+        
+        </fieldset>
+</div>
+
+</body>
+</html>

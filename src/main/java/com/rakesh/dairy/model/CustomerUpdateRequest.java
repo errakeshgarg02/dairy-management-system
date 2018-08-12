@@ -1,22 +1,32 @@
 package com.rakesh.dairy.model;
 
-import java.io.Serializable;
 
-public class CustomerUpdateRequest implements Serializable {
+public class CustomerUpdateRequest {
 	
-	private static final long serialVersionUID = -6350181391841281913L;
 	private Integer id;
+	private String name;
+	private String customerCode;
 	private String fatherName;
 	private Long mobileNumber;
 	private String dateOfBirth;
 	private String address;
-	
-	
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCustomerCode() {
+		return customerCode;
+	}
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
 	}
 	public String getFatherName() {
 		return fatherName;
@@ -44,9 +54,9 @@ public class CustomerUpdateRequest implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "CustomerUpdateRequest [id=" + id + ", fatherName=" + fatherName + ", mobileNumber=" + mobileNumber
-				+ ", dateOfBirth=" + dateOfBirth + ", address=" + address + "]";
-	}
-	
+		return "CustomerUpdateRequest [id=" + id + ", name=" + name + ", customerCode=" + customerCode + ", fatherName="
+				+ fatherName + ", mobileNumber=" + mobileNumber + ", dateOfBirth=" + dateOfBirth + ", address="
+				+ address + "]";
+	}	
 	
 }

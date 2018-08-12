@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Dairy Management System | Customer Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    
+</head>
+<body>
+
+<div class="container">
+	
+	<div class="">
+		<h2>Display all Customers</h2>
+          <p>Type something in the input field to search the table for name, mobile number etc:</p>  
+          <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+          <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+              <tr>
+                <th>Customer Code</th>  
+                <th>Name</th>
+                <th>Father name</th>
+                <th>Mobile</th>
+                <th>Address</th>
+                <th>Edit Operation</th>
+                <th>Add Milk Operation</th>  
+              </tr>
+            </thead>              
+            <tbody id="myTable" th:each="customer: ${customers}">
+              <tr>
+                <td th:text="${customer.customerCode}"></td>
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.fatherName}"></td>
+                <td th:text="${customer.mobileNumber}"></td> 
+                <td th:text="${customer.address}"></td>
+                <td><a th:with="var=*{customer.id}" th:href="@{'/customer/edit?id='+${var}}">Edit</a></td>
+                <td><a th:with="var=*{customer.id}" th:href="@{'/milk/addMilkPageWithCustomer?customerId='+${var}}">Add Milk</a></td>
+                </tr>  
+            </tbody>
+          </table>
+        
+	</div>
+
+</div>
+
+    
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});    
+       
+</script>
+    
+
+</body>
+</html>

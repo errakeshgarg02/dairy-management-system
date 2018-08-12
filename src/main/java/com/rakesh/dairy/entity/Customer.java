@@ -19,6 +19,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="customer")
 @EntityListeners(AuditingEntityListener.class)
@@ -44,6 +48,7 @@ public class Customer implements Serializable {
     @LastModifiedDate	
 	private LocalDate updatedDate;
     
+    @JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade=CascadeType.ALL,orphanRemoval=true)
 	private Set<Milk> milks;
 

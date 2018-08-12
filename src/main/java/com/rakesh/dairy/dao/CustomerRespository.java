@@ -12,7 +12,7 @@ import com.rakesh.dairy.entity.Customer;
 @Repository
 public interface CustomerRespository extends JpaRepository<Customer, Integer> {
 
-	public Customer findByMobileNumber(Long mobileNumber);
+	public Optional<Customer> findByMobileNumber(Long mobileNumber);
 
 	@Query("SELECT max(ch.customerCode) FROM Customer ch")
 	public String getMaxCustomerCode();

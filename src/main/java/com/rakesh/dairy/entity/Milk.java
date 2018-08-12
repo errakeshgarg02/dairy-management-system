@@ -2,7 +2,6 @@ package com.rakesh.dairy.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,9 +19,9 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.rakesh.dairy.constant.MilkType;
-import com.rakesh.dairy.constant.Shift;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="milk")
 @EntityListeners(AuditingEntityListener.class)

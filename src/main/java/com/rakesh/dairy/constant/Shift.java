@@ -13,9 +13,9 @@ public enum Shift {
 		return value;
 	}
 
-	public Shift getShift(String value) {
+	public static Shift getShift(String value) {
 		for (Shift val : Shift.values()) {
-			if (val.equals(value)) {
+			if (val.getValue().equals(value)) {
 				return val;
 			}
 		}
