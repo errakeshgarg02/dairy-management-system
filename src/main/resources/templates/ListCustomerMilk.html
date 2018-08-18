@@ -84,9 +84,9 @@
                 <td th:text="${milk.price}"></td>
                 <td th:text="${milk.shift}"></td> 
                 <td th:text="${milk.milkType}"></td>                                
-              </tr>
+              </tr>              
             </tbody>
-            <tfoot class="thead-light">
+            <tfoot class="thead-dark">
                 <tr>
                     <th>Total Weight</th>
                     <th><strong th:text="${totalWeight}"></strong><code> ltr</code></th>
@@ -94,10 +94,8 @@
                     <th>Total Price</th>
                     <th><strong th:text="${totalPrice}"></strong><code> Rs.</code></th>
                     <th></th>
-                    <th></th>
-                                      
-                </tr>
-                 
+                    <th></th>                                      
+                </tr>                 
             </tfoot> 
           </table>
         
@@ -109,8 +107,15 @@
 function printData()
 {
    var divToPrint=document.getElementById("printDiv");
+   
+   var printData = '<html><header></header><body><div class="text-center" style="margin-bottom:0">'+
+  			'<h1>Milk Dairy Management System</h1>'+
+  			'<p>Pawan Karayana Store | Ullak | Mob. 9815908754</p>'+ 
+			'</div>'+divToPrint.outerHTML +'</body></html>';
+   
    newWin= window.open("");   
-   newWin.document.write(divToPrint.outerHTML);
+   
+   newWin.document.write(printData);
    newWin.print();
    newWin.close();
 }

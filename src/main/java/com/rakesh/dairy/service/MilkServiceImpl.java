@@ -1,5 +1,7 @@
 package com.rakesh.dairy.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,17 +104,8 @@ public class MilkServiceImpl implements MilkService {
 	public AbstractResponse searchMilkBetweenDates(SearchMilkRequest searchMilkRequest) {
 		AbstractResponse response = new AbstractResponse();
 		List<Milk> milkList = null;
-		if (!StringUtils.isEmpty(searchMilkRequest.getCustomerId())) {
-			milkList = milkRepository.findByCustomerAndDateBetween(searchMilkRequest.getCustomerId(),
-					converterUtil.stringToLocalDate(searchMilkRequest.getFromDate()),
-					converterUtil.stringToLocalDate(searchMilkRequest.getToDate()));
-		} else {
-			Optional<Customer> findByCustomerCode = customerRespository
-					.findByCustomerCode(searchMilkRequest.getCustomerCode());
-			milkList = milkRepository.findByCustomerAndDateBetween(findByCustomerCode.get().getId(),
-					converterUtil.stringToLocalDate(searchMilkRequest.getFromDate()),
-					converterUtil.stringToLocalDate(searchMilkRequest.getToDate()));
-		}
+
+		milkList = findCustomerMilk(searchMilkRequest);
 
 		if (!StringUtils.isEmpty(milkList)) {
 			List<MilkRequest> convertToMilkRequests = converterUtil.convertToMilkRequests(milkList);
@@ -122,6 +115,40 @@ public class MilkServiceImpl implements MilkService {
 		}
 		
 		return response;
+	}
+	
+	private List<Milk> findCustomerMilk(SearchMilkRequest searchMilkRequest){
+		boolean customerAllMilk = false;
+		Integer custId = searchMilkRequest.getCustomerId();		
+		LocalDate startDate = null;
+		LocalDate endDate = null;
+		if(!StringUtils.isEmpty(searchMilkRequest.getFromDate())) {
+			startDate= converterUtil.stringToLocalDate(searchMilkRequest.getFromDate());
+		}		
+		if(!StringUtils.isEmpty(searchMilkRequest.getToDate())) {
+			endDate = converterUtil.stringToLocalDate(searchMilkRequest.getToDate());
+		}
+		
+		if(StringUtils.isEmpty(startDate) || StringUtils.isEmpty(endDate)) {
+			customerAllMilk = true;
+		}
+		
+		if(StringUtils.isEmpty(searchMilkRequest.getCustomerId())) {
+			Optional<Customer> findByCustomerCode = customerRespository
+					.findByCustomerCode(searchMilkRequest.getCustomerCode());
+			if(findByCustomerCode.isPresent()) {
+				custId = findByCustomerCode.get().getId();
+			}			
+		} 
+		
+		List<Milk> milkList = new ArrayList<>();
+		if(customerAllMilk) {
+			milkList = milkRepository.findMilkByCustomer(custId);
+		} else {
+			milkRepository.findByCustomerAndDateBetween(custId, startDate, endDate);
+		}
+		
+		return milkList;
 	}
 
 	@Override

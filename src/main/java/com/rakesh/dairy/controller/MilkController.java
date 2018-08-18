@@ -94,7 +94,7 @@ public class MilkController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/deleteAll", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/deleteAll")
 	public AbstractResponse deleteAll(@RequestParam("customerCode") String customerCode) {
 		return milkService.deleteMilkByCustomerCode(customerCode);
 	}

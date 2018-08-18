@@ -14,7 +14,7 @@ public interface CustomerService {
 	
 	public AbstractResponse updateCustomer(CustomerUpdateRequest request);
 	
-	public AbstractResponse deleteCustomer(String name, Long mobileNumber);
+	public AbstractResponse deleteCustomer(String customerCode);
 	
 	public AbstractResponse findCustomer(String name, Long mobileNumber);
 	

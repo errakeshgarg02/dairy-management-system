@@ -56,39 +56,37 @@
 		<form action="#" th:action="@{/customer/register}" th:object="${createRequest}" method="post">
             
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="customerCode">Customer Code:</label>
                     <input type="text" th:value="${createRequest.customerCode}" class="form-control" readonly id="customerCode" th:field="*{customerCode}"/>                
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="customerName">Customer Name:</label>
                     <input type="text" class="form-control" id="name" th:field="*{name}"/>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="fatherName">Father Name:</label>
-                    <input type="text" class="form-control" id="fatherName" th:field="*{fatherName}"/>
-                </div>            
+
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
+            <div class="form-row">            
+                <!--div class="form-group col-md-4">
                     <label for="mobileNumber">Mobile Number:</label>
                     <input type="text" class="form-control" id="mobileNumber" th:field="*{mobileNumber}"/>
-                </div>
-                <div class="form-group col-md-4">
+                </div-->
+                <div class="form-group col-md-6">
+                    <label for="fatherName">Father Name:</label>
+                    <input type="text" class="form-control" id="fatherName" th:field="*{fatherName}"/>
+                </div>                            
+                <div class="form-group col-md-6">
                     <label for="address">Address:</label>
                     <input type="text" class="form-control" id="address" th:field="*{address}"/>
                 </div>
-                <div class="form-group col-md-4">
+                <!--div class="form-group col-md-4">
                     <label for="dateOfBith">Date of birth:</label>
                     <input type="date" class="form-control" id="datepicker" th:field="*{dateOfBirth}"/>
-                </div>            
+                </div-->            
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <button type="submit" class="btn btn-primary btn-block">Register</button>                    
-                </div>
-                <div class="form-group col-md-6">                    
-                    <button type="button" class="btn btn-primary btn-block" onclick="window.location.href='/home'">Home</button>
                 </div>
             </div>
 			

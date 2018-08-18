@@ -49,8 +49,8 @@
 </div><br/><br/><br/><br/>
 <div class="container">		
         <fieldset>
-        <h2>Add Rate Form</h2>     
-		<form action="#" th:action="@{/rate/create}" th:object="${createRate}" method="post">            
+        <h3>Add Rate Form</h3>     
+		<form class="form-inline" action="#" th:action="@{/rate/create}" th:object="${createRate}" method="post">            
                 <div class="form-group">
                     <label for="fat">Fat:</label>
 				    <input type="number" class="form-control" min="0.0" step=".1" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{fat}"/>
@@ -62,8 +62,8 @@
                  <div class="form-group">
                     <label for="rate">Rate:</label>
 				    <input type="number" class="form-control" min="0.0" step=".01" pattern="^\d+(?:\.\d{1,2})?$" th:field="*{rate}"/> 
-                </div>	
-			<button type="submit" class="btn btn-primary btn-block">Add Rate</button>
+                </div>	&nbsp;&nbsp;
+			<button type="submit" class="btn btn-primary ">Add Rate</button>
 		</form>       
         </fieldset>
 </div> 

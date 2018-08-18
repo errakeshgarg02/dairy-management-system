@@ -8,7 +8,10 @@
   <script src="/js/jquery.min.js"></script>
   <script src="/js/popper.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>    
-    
+  <style>
+  	.bodycontainer { max-height: 250px; width: 100%; margin: 0; overflow-y: auto; }
+	.table-scrollable { margin: 0; padding: 0; }
+  </style> 	    
     
 </head>
 <body>
@@ -53,26 +56,32 @@
           <p>Type something in the input field to search the table for rate, fat or snf:</p>  
           <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
-          <table class="table table-hover table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th>Fat</th>  
-                <th>Snf</th>
-                <th>Rate</th>
-                <th>Update Operation</th>
-                <th>Delete Operate</th>
-              </tr>
-            </thead>              
-            <tbody id="myTable" th:each="rate: ${rates}">
-              <tr>
-                <td th:text="${rate.fat}"></td>
-                <td th:text="${rate.snf}"></td>
-                <td th:text="${rate.rate}"></td>
-                <td><a th:with="var=*{rate.id}" th:href="@{'/rate/edit?id='+${var}}">Edit</a></td>
-                <td><a th:with="var=*{rate.id}" th:href="@{'/rate/delete?id='+${var}}">Delete</a></td>
-                </tr>  
-            </tbody>
-          </table>        
+           <div class="table-responsive">
+	          <table class="table table-hover table-bordered table-striped">
+	            <thead class="thead-dark">
+	              <tr>
+	                <th width="20%">Fat</th>  
+	                <th width="20%">Snf</th>
+	                <th width="20%">Rate</th>
+	                <th width="20%">Update Operation</th>
+	                <th width="20%">Delete Operate</th>
+	              </tr>
+	            </thead> 
+	          </table>    
+              <div class="bodycontainer scrollable">
+		          <table class="table table-hover table-striped table-bordered table-scrollable">
+		            <tbody id="myTable" th:each="rate: ${rates}">
+		              <tr>
+		                <td width="20%" th:text="${rate.fat}"></td>
+		                <td width="20%" th:text="${rate.snf}"></td>
+		                <td width="20%" th:text="${rate.rate}"></td>
+		                <td width="20%"><a th:with="var=*{rate.id}" th:href="@{'/rate/edit?id='+${var}}">Edit</a></td>
+		                <td width="20%"><a th:with="var=*{rate.id}" th:href="@{'/rate/delete?id='+${var}}">Delete</a></td>
+		                </tr>  
+		            </tbody>
+		          </table>              
+           	  </div>           
+           </div>                  
 	</div>
 </div>    
 <script>
@@ -84,7 +93,8 @@ $(document).ready(function(){
     });
   });
 });    
-       
+     
+ 
 </script>
 </body>
 </html>

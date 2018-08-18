@@ -8,7 +8,10 @@
   <script src="/js/jquery.min.js"></script>
   <script src="/js/popper.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>    
-   
+   <style>
+  	.bodycontainer { max-height: 250px; width: 100%; margin: 0; overflow-y: auto; }
+	.table-scrollable { margin: 0; padding: 0; }
+  </style> 	      
     
 </head>
 <body>
@@ -54,31 +57,34 @@
           <p>Type something in the input field to search the table for name, mobile number etc:</p>  
           <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
-          <table class="table table-hover table-bordered">
-            <thead class="thead-dark">
-              <tr>
-                <th>Customer Code</th>  
-                <th>Name</th>
-                <th>Father name</th>
-                <th>Mobile</th>
-                <th>Address</th>
-                <th>Edit Operation</th>
-                <th>Add Milk Operation</th>  
-              </tr>
-            </thead>              
-            <tbody id="myTable" th:each="customer: ${customers}">
-              <tr>
-                <td th:text="${customer.customerCode}"></td>
-                <td th:text="${customer.name}"></td>
-                <td th:text="${customer.fatherName}"></td>
-                <td th:text="${customer.mobileNumber}"></td> 
-                <td th:text="${customer.address}"></td>
-                <td><a th:with="var=*{customer.id}" th:href="@{'/customer/edit?id='+${var}}">Edit</a></td>
-                <td><a th:with="var=*{customer.id}" th:href="@{'/milk/addMilkPageWithCustomer?customerId='+${var}}">Add Milk</a></td>
-                </tr>  
-            </tbody>
-          </table>
-        
+          <div class="table-responsive">
+          	<table class="table table-hover table-bordered table-striped">
+	          	 <thead class="thead-dark">
+	              <tr>
+	                <th width="15%">Customer Code</th>  
+	                <th width="18%">Name</th>
+	                <th width="18%">Father name</th>	                
+	                <th width="14%">Address</th>
+	                <th width="15%">Edit Operation</th>
+	                <th width="20%">Add Milk Operation</th>  
+	              </tr>
+	            </thead>         	
+          	</table>
+          	<div class="bodycontainer scrollable">
+	           <table class="table table-hover table-bordered table-striped table-scrollable">
+	            <tbody id="myTable" th:each="customer: ${customers}">
+	              <tr>
+	                <td width="15%" th:text="${customer.customerCode}"></td>
+	                <td width="18%" th:text="${customer.name}"></td>
+	                <td width="18%" th:text="${customer.fatherName}"></td>	                
+	                <td width="14%" th:text="${customer.address}"></td>
+	                <td width="15%"><a th:with="var=*{customer.id}" th:href="@{'/customer/edit?id='+${var}}">Edit</a></td>
+	                <td width="20%"><a th:with="var=*{customer.id}" th:href="@{'/milk/addMilkPageWithCustomer?customerId='+${var}}">Add Milk</a></td>
+	                </tr>  
+	            </tbody>
+	          </table>         	
+          	</div>
+          </div>         
 	</div>
 
 </div>

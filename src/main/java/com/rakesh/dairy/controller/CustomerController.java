@@ -28,6 +28,8 @@ public class CustomerController {
 	@PostMapping(value = "/register")
 	public ModelAndView createCustomer(@ModelAttribute("createRequest") CreateCustomerRequest createRequest) throws DairyException {
 		ModelAndView modelAndView = new ModelAndView();
+		createRequest.setMobileNumber(System.currentTimeMillis());//TEMP
+		createRequest.setDateOfBirth("2018-08-18");//TEMP
 		AbstractResponse response = customerService.registerCustomer(createRequest);	
 		modelAndView.addObject("message", response.getMessage());
 		modelAndView.setViewName("redirect:/customer/signup");		
@@ -52,9 +54,8 @@ public class CustomerController {
 	}
 
 	@GetMapping(value = "/delete")
-	public AbstractResponse deleteCucstomer(@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "mobileNumber", required = true) Long mobileNumber) {
-		return customerService.deleteCustomer(name, mobileNumber);
+	public AbstractResponse deleteCucstomer(@RequestParam(value = "customerCode") String customerCode) {
+		return customerService.deleteCustomer(customerCode);
 	}
 
 	@GetMapping(value = "/findAll")

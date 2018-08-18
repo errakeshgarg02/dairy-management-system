@@ -62,12 +62,12 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public AbstractResponse deleteCustomer(String name, Long mobileNumber) {
+	public AbstractResponse deleteCustomer(String customerCode) {
 		AbstractResponse response = new AbstractResponse();
 		response.setStatus(200);
-		List<Customer> findByNameAndMobileNumber = customerRespository.findByNameAndMobileNumber(name, mobileNumber);
-		if (!StringUtils.isEmpty(findByNameAndMobileNumber) && findByNameAndMobileNumber.size() > 0) {
-			customerRespository.delete(findByNameAndMobileNumber.get(0));
+		Optional<Customer> optionalCustomer = customerRespository.findByCustomerCode(customerCode);
+		if (optionalCustomer.isPresent()) {
+			customerRespository.delete(optionalCustomer.get());
 			response.setData("Customer deleted");
 		}
 
